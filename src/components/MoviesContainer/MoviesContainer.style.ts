@@ -7,7 +7,7 @@ export const Wrapper = styled.main`
 
   .heading {
     font-size: 1.2em;
-    font-weight: 400;
+    font-weight: 600;
     padding: 15px 0;
   }
 

@@ -3,7 +3,7 @@ import './App.css';
 import {useMovies} from './hooks/useMovies';
 import Header from './components/Navbar/Header';
 import MoviesList from './components/MoviesWrapper/MoviesList';
-import PageContainer from './components/PageContainer/PageContainer';
+import MoviesContainer from './components/MoviesContainer/MoviesContainer';
 
 function App() {
 
@@ -11,10 +11,10 @@ function App() {
 
   return (
     <div className="App">
-      <PageContainer>
+      <MoviesContainer>
         <Header tabs={genres} selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres}/>
         <MoviesList data={data} isLoading={isLoading}/>
-      </PageContainer>
+      </MoviesContainer>
     </div>
   );
 }
