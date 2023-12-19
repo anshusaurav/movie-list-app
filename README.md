@@ -1,7 +1,9 @@
 
 
-## Getting Started 🚀
+# Movie list app 🎬
 
+
+## Installation and Usage 📦
 To get started, follow the installation and usage instructions below.
 
 1. Clone the repository to your local machine:
@@ -34,7 +36,7 @@ npm start
 
 ## Requirements 📝
 
-### Covered Requirements
+### Covered Requirements 📋
 - [x] The app is able to display a year-wise list of movies.
 - [x] The app loads movies of previous year when user scrolls up.
 - [x] The app loads movies of next year when user scrolls down.
@@ -46,6 +48,6 @@ npm start
 - [x] The app uses TypeScript for enhanced type safety and code quality.
 
 
-### Additional Requirements
+### Additional Requirements 📋
 - [x] The app should be implemented in React Native instead of a web app
 - [x] The app should be able to display a list of movies based on search string.
