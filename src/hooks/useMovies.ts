@@ -19,8 +19,11 @@ export const useMovies = () => {
     fetchGenres()
   }, [])
 
-  const fetchData = async (emptyList = false) => {
-    try{
+
+
+  useEffect(() => {
+    const fetchData = async (emptyList = false) => {
+      try{
         setIsLoading(true);
         const newData: Movies = await apiEndpoints.fetchMovies(emptyList ? initialYear :yearOffset, selectedGenres);
         setIsLoading(false);
@@ -38,23 +41,22 @@ export const useMovies = () => {
               setData([...movies, {year: yearOffset, movies:[...newData?.results]}])
             }
             if (yearOffset < movies?.[0]?.year) {
-                setData([{year: yearOffset, movies:[...newData?.results]},...movies])
+              setData([{year: yearOffset, movies:[...newData?.results]},...movies])
             }
           }
         }
-    } catch(err) {
-      console.error(err);
+      } catch(err) {
+        console.error(err);
+      }
+    };
+    if(selectedGenres?.length) {
+      setData([]);
+      fetchData(true);
     }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [yearOffset]);
-
-  useEffect(() => {
-    setData([]);
-    fetchData(true);
-  },[selectedGenres])
+    else{
+      fetchData();
+    }
+  }, [yearOffset, selectedGenres, currentYear, data]);
 
   const handleScroll = useCallback(() => {
 
