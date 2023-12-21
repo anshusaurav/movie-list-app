@@ -8,7 +8,7 @@ import MoviesContainer from './components/MoviesContainer/MoviesContainer';
 function App() {
 
   const {data, selectedGenres, setSelectedGenres, genres, isLoading} = useMovies()
-
+  // console.log(data, yearOffset);
   return (
     <div className="App">
       <MoviesContainer>

@@ -12,7 +12,6 @@ export const useMovies = () => {
 
   const fetchGenres = async() => {
     const genresList: any = await apiEndpoints.fetchGenres();
-    console.log(genresList)
     setGenres(genresList?.genres)
   }
 
@@ -22,27 +21,27 @@ export const useMovies = () => {
 
   const fetchData = async (emptyList = false) => {
     try{
-      setIsLoading(true);
-      const newData: Movies = await apiEndpoints.fetchMovies(emptyList ? initialYear :yearOffset, selectedGenres);
-      setIsLoading(false);
-      if (emptyList) {
-      setYearOffset(initialYear);
-      }
+        setIsLoading(true);
+        const newData: Movies = await apiEndpoints.fetchMovies(emptyList ? initialYear :yearOffset, selectedGenres);
+        setIsLoading(false);
+        if (emptyList) {
+          setYearOffset(initialYear);
+        }
 
-      const movies = emptyList ? [] : [...data];
-      if (!movies?.length) {
-        setData([{year: emptyList ? initialYear :yearOffset, movies:[...newData?.results] }])
-      } else {
-        const index = movies?.findIndex((item) => item?.year === yearOffset);
-        if (index < 0) {
-          if (yearOffset > movies?.[movies?.length - 1]?.year && yearOffset <= Number(currentYear)) {
-            setData([...movies, {year: yearOffset, movies:[...newData?.results]}])
-          }
-          if (yearOffset < movies?.[0]?.year) {
-              setData([{year: yearOffset, movies:[...newData?.results]},...movies])
+        const movies = emptyList ? [] : [...data];
+        if (!movies?.length) {
+          setData([{year: emptyList ? initialYear :yearOffset, movies:[...newData?.results] }])
+        } else {
+          const index = movies?.findIndex((item) => item?.year === yearOffset);
+          if (index < 0) {
+            if (yearOffset > movies?.[movies?.length - 1]?.year && yearOffset <= Number(currentYear)) {
+              setData([...movies, {year: yearOffset, movies:[...newData?.results]}])
+            }
+            if (yearOffset < movies?.[0]?.year) {
+                setData([{year: yearOffset, movies:[...newData?.results]},...movies])
+            }
           }
         }
-      }
     } catch(err) {
       console.error(err);
     }
@@ -58,10 +57,11 @@ export const useMovies = () => {
   },[selectedGenres])
 
   const handleScroll = useCallback(() => {
+
     const scrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.body.scrollHeight;
-
-    if (scrollPosition >= documentHeight - 150 && yearOffset < Number(currentYear)) {
+    console.log(window.scrollY, window.innerHeight, documentHeight);
+    if (scrollPosition >= documentHeight - 100 && yearOffset < Number(currentYear)) {
       const year = data?.length ? data?.[data?.length - 1]?.year : yearOffset;
       setYearOffset(year + 1);
     }
@@ -80,6 +80,7 @@ export const useMovies = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
+  // console.log(data, yearOffset, setSelectedGenres, genres, selectedGenres, isLoading);
   return {
     data : data, yearOffset, setSelectedGenres, genres, selectedGenres, isLoading
   }
