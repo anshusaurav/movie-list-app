@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {useMovies} from './hooks/useMovies';
-import Header from './components/Navbar/Header';
+import Header from './components/Header/Header';
 import MoviesList from './components/MoviesWrapper/MoviesList';
 import MoviesContainer from './components/MoviesContainer/MoviesContainer';
 

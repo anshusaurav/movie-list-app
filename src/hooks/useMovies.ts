@@ -2,12 +2,12 @@ import {useState, useEffect, useCallback} from 'react'
 import { apiEndpoints, Movies } from '../api/api';
 
 export const useMovies = () => {
-  const initialYear = 2012;
+  const startYear = 2012;
   const [data, setData] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [genres, setGenres] = useState<any>([]);
   const [selectedGenres, setSelectedGenres] = useState<any> ([])
-  const [yearOffset, setYearOffset] = useState(initialYear);
+  const [offsetYear, setOffsetYear] = useState(startYear);
   const currentYear = new Date().getFullYear();
 
   const fetchGenres = async() => {
@@ -22,26 +22,26 @@ export const useMovies = () => {
 
 
   useEffect(() => {
-    const fetchData = async (emptyList = false) => {
+    const fetchData = async (isEmpty = false) => {
       try{
         setIsLoading(true);
-        const newData: Movies = await apiEndpoints.fetchMovies(emptyList ? initialYear :yearOffset, selectedGenres);
+        const newData: Movies = await apiEndpoints.fetchMovies(isEmpty ? startYear :offsetYear, selectedGenres);
         setIsLoading(false);
-        if (emptyList) {
-          setYearOffset(initialYear);
+        if (isEmpty) {
+          setOffsetYear(startYear);
         }
 
-        const movies = emptyList ? [] : [...data];
+        const movies = isEmpty ? [] : [...data];
         if (!movies?.length) {
-          setData([{year: emptyList ? initialYear :yearOffset, movies:[...newData?.results] }])
+          setData([{year: isEmpty ? startYear :offsetYear, movies:[...newData?.results] }])
         } else {
-          const index = movies?.findIndex((item) => item?.year === yearOffset);
+          const index = movies?.findIndex((item) => item?.year === offsetYear);
           if (index < 0) {
-            if (yearOffset > movies?.[movies?.length - 1]?.year && yearOffset <= Number(currentYear)) {
-              setData([...movies, {year: yearOffset, movies:[...newData?.results]}])
+            if (offsetYear > movies?.[movies?.length - 1]?.year && offsetYear <= Number(currentYear)) {
+              setData([...movies, {year: offsetYear, movies:[...newData?.results]}])
             }
-            if (yearOffset < movies?.[0]?.year) {
-              setData([{year: yearOffset, movies:[...newData?.results]},...movies])
+            if (offsetYear < movies?.[0]?.year) {
+              setData([{year: offsetYear, movies:[...newData?.results]},...movies])
             }
           }
         }
@@ -56,24 +56,23 @@ export const useMovies = () => {
     else{
       fetchData();
     }
-  }, [yearOffset, selectedGenres, currentYear, data]);
+  }, [offsetYear, selectedGenres, currentYear, data]);
 
   const handleScroll = useCallback(() => {
 
     const scrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.body.scrollHeight;
-    console.log(window.scrollY, window.innerHeight, documentHeight);
-    if (scrollPosition >= documentHeight - 100 && yearOffset < Number(currentYear)) {
-      const year = data?.length ? data?.[data?.length - 1]?.year : yearOffset;
-      setYearOffset(year + 1);
+
+    if (scrollPosition >= documentHeight - 100 && offsetYear < Number(currentYear)) {
+      const year = data?.length ? data?.[data?.length - 1]?.year : offsetYear;
+      setOffsetYear(year + 1);
     }
 
-    if (window.scrollY === 0 && yearOffset > 0) {
-      const year = data?.length ? data?.[0]?.year: yearOffset;
-      setYearOffset(year - 1);
+    if (window.scrollY === 0 && offsetYear > 0) {
+      const year = data?.length ? data?.[0]?.year: offsetYear;
+      setOffsetYear(year - 1);
     }
-
-  }, [yearOffset, data, currentYear]);
+  }, [offsetYear, data, currentYear]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -82,8 +81,7 @@ export const useMovies = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll]);
-  // console.log(data, yearOffset, setSelectedGenres, genres, selectedGenres, isLoading);
   return {
-    data : data, yearOffset, setSelectedGenres, genres, selectedGenres, isLoading
+    data : data, setSelectedGenres, genres, selectedGenres, isLoading
   }
 }

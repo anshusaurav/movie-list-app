@@ -11,10 +11,6 @@ const MovieCard:FC<MovieProps> = ({ movie}) => {
   return (
     <Wrapper>
         <div className='image' style={{backgroundImage:  `url(https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path})`}}>
-          {/*<img*/}
-          {/*  src={`https://image.tmdb.org/t/p/w220_and_h330_face/${movie.poster_path}`}*/}
-          {/*  alt={movie.original_title}*/}
-          {/*/>*/}
         </div>
         <div className='cover'>
           <h1 className='title'>{movie.original_title}</h1>
