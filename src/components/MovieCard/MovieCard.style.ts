@@ -36,17 +36,16 @@ export const Wrapper = styled.main`
     right: 0;
     width: 100%;
     background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 60%, transparent 100%);
+    text-align: left;
     .title {
       width: 100%;
-      font-size: 0.9em;
+      font-size: 14px;
       color: #FEFEFE;
-      font-weight: 500;
-      text-align: left;
-      padding: 4px 0;
+      font-weight: 600;
     }
     .rating {
-      font-size: 0.75em;
-      text-align: left;
+      font-size: 8px;
+      font-weight: 600;
     }
   }
 

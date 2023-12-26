@@ -7,11 +7,7 @@ export const CommonStyle = createGlobalStyle`
         --black: #111;
         --lightGray: #eee;
         --mediumGray: #353535;
-        --darkGray: #1c1c1c;
-        --fontSuperBig: 2.5rem;
-        --fontBig: 1.5rem;
-        --fontMedium: 1.1rem;
-        --fontSmall: 0.9rem;
+        --darkGray: #242424;
     }
 
     *{
@@ -21,7 +17,7 @@ export const CommonStyle = createGlobalStyle`
         text-decoration: none;
     }
     body{
-        font-family: "Inter",san-serif;
+        font-family: 'Saira Semi Condensed', sans-serif;
         h1{
             font-size: 2rem;
             font-weight: 600;

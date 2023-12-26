@@ -8,7 +8,7 @@ export const Wrapper = styled.main`
     padding: 8px;
   }
   .heading {
-    font-size: 1.2em;
+    font-size: 20px;
     font-weight: 400;
     padding: 24px 0 8px;
     display: flex;
@@ -27,7 +27,7 @@ export const Wrapper = styled.main`
     text-align: center;
     margin-top: 100px;
     font-weight: 400;
-    font-size: 1.2em;
+    font-size: 20px;
     height: 84vh;
     display: flex;
     align-items:center;

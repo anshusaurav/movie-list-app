@@ -6,7 +6,7 @@ export const Wrapper = styled.main`
     height: 100%;
 
   .heading {
-    font-size: 1.2em;
+    font-size: 20px;
     font-weight: 600;
     padding: 15px 0;
   }
@@ -21,7 +21,7 @@ export const Wrapper = styled.main`
     text-align: center;
     margin-top: 100px;
     font-weight: 400;
-    font-size: 1.2em;
+    font-size: 20px;
     height: 100%;
   }
 `;
